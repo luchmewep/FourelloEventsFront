@@ -39,13 +39,8 @@ export default function NavBar() {
               </Link>
             </MDBNavItem>
             <MDBNavItem>
-              <Link className="nav-link" to="/">
-                Features
-              </Link>
-            </MDBNavItem>
-            <MDBNavItem>
-              <Link className="nav-link" to="/">
-                Pricing
+              <Link className="nav-link" to="/hamima">
+                Hamima
               </Link>
             </MDBNavItem>
           </MDBNavbarNav>
