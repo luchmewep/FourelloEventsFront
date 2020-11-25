@@ -33,12 +33,12 @@ export default function NavBar() {
         <MDBNavbarToggler onClick={toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={isHamOpen} navbar>
           <MDBNavbarNav left>
-            <MDBNavItem active={location.pathname.match("^/$") !== null}>
+            <MDBNavItem active={isCurrentPage("root")}>
               <Link className="nav-link" to="/">
                 Home
               </Link>
             </MDBNavItem>
-            <MDBNavItem active={location.pathname.match("hamima") !== null}>
+            <MDBNavItem active={isCurrentPage("hamima")}>
               <Link className="nav-link" to="/hamima">
                 Hamima
               </Link>
