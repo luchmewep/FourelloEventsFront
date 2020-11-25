@@ -107,22 +107,19 @@ export default function NavBar() {
   )
 }
 
-const NavLink = (
-  props: JSX.IntrinsicAttributes &
-    JSX.IntrinsicClassAttributes<Link<unknown>> &
-    Readonly<import("gatsby-link").GatsbyLinkProps<unknown>> &
-    Readonly<{ children?: React.ReactNode }>
-) => (
-  <Link
-    {...props}
-    getProps={({ isCurrent }) => {
-      // the object returned here is passed to the
-      // anchor element's props
-      return {
-        style: {
-          color: isCurrent ? "red" : "blue",
-        },
-      }
-    }}
-  />
-)
+export const isBrowser = () => typeof window !== "undefined"
+
+export const isCurrentPage = (page: string) => {
+  if (!isBrowser()) return false
+  switch (page) {
+    case "root":
+      return location.pathname.match("^/$") !== null
+      break
+    case "hamima":
+      return location.pathname.match("hamima") !== null
+      break
+    default:
+      return false
+      break
+  }
+}
