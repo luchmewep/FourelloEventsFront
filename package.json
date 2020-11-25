@@ -7,6 +7,7 @@
   "dependencies": {
     "gatsby": "^2.13.64",
     "gatsby-image": "^2.2.8",
+    "mdbreact": "https://bit.ly/mdbreact4250",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
     "react-helmet": "^5.2.1",
@@ -52,7 +53,9 @@
     "format": "prettier --write \"**/*.{js,ts,tsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\"",
+    "dev": "gatsby clean && gatsby develop -p 8001",
+    "prod": "gatsby clean && gatsby build && gatsby serve -p 9001"
   },
   "repository": {
     "type": "git",

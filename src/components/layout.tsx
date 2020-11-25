@@ -1,31 +1,33 @@
 import React from "react"
-import { Normalize } from "styled-normalize"
-import styled from "styled-components"
 
-import GlobalStyles from "./global-styles"
+// Layout-related files
 import Footer from "./footer"
+import NavBar from "./navbar"
 
-const AppContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-`
-
-const Main = styled.main`
-  flex-grow: 1;
-  display: flex;
-  position: relative;
-`
+// MDBReact-related files
+import "@fortawesome/fontawesome-free/css/all.min.css"
+import "bootstrap-css-only/css/bootstrap.min.css"
+import "mdbreact/dist/css/mdb.css"
+import { MDBContainer } from "mdbreact"
 
 const Layout = ({ children }: LayoutProps) => (
-  <AppContainer>
-    <Normalize />
-    <GlobalStyles />
-
-    <Main>{children}</Main>
-
+  <MDBContainer
+    fluid
+    style={{
+      margin: 0,
+      padding: 0,
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "space-between",
+      minHeight: "100vh",
+    }}
+  >
+    <NavBar />
+    <MDBContainer fluid className="pt-3 mt-5 p-5">
+      {children}
+    </MDBContainer>
     <Footer />
-  </AppContainer>
+  </MDBContainer>
 )
 
 interface LayoutProps {
