@@ -7,17 +7,16 @@ import {
   MDBCollapse,
   MDBNavbarNav,
   MDBNavItem,
-  MDBIcon,
   MDBDropdown,
   MDBDropdownToggle,
   MDBDropdownMenu,
-  MDBDropdownItem,
   MDBFormInline,
 } from "mdbreact"
 import React, { useState } from "react"
 
 export default function NavBar() {
   const [isHamOpen, setIsHamOpen] = useState(false)
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const toggleCollapse = () => setIsHamOpen(!isHamOpen)
   return (
     <MDBContainer>
@@ -50,7 +49,7 @@ export default function NavBar() {
               </Link>
             </MDBNavItem>
           </MDBNavbarNav>
-          <MDBNavbarNav right>
+          <MDBNavbarNav center>
             <MDBNavItem>
               <MDBFormInline waves>
                 <div className="md-form my-0">
@@ -65,26 +64,47 @@ export default function NavBar() {
             </MDBNavItem>
           </MDBNavbarNav>
           <MDBNavbarNav right>
-            <MDBNavItem>
-              <MDBDropdown>
-                <MDBDropdownToggle className="dopdown-toggle" nav>
-                  <img
-                    src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg"
-                    className="rounded-circle z-depth-0"
-                    style={{ height: "35px", padding: 0 }}
-                    alt=""
-                  />
-                </MDBDropdownToggle>
-                <MDBDropdownMenu className="dropdown-default" right>
-                  <Link className="dropdown-item" to="/">
-                    My account
+            {isLoggedIn ? (
+              <MDBNavItem>
+                <MDBDropdown>
+                  <MDBDropdownToggle className="dopdown-toggle" nav>
+                    <img
+                      src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg"
+                      className="rounded-circle z-depth-0"
+                      style={{ height: "35px", padding: 0 }}
+                      alt=""
+                    />
+                  </MDBDropdownToggle>
+                  <MDBDropdownMenu className="dropdown-default" right>
+                    <Link className="dropdown-item" to="/">
+                      My account
+                    </Link>
+                    <Link className="dropdown-item" to="/">
+                      Log out
+                    </Link>
+                  </MDBDropdownMenu>
+                </MDBDropdown>
+              </MDBNavItem>
+            ) : (
+              <>
+                <MDBNavItem>
+                  <Link className="nav-link" to="/login">
+                    Login
                   </Link>
-                  <Link className="dropdown-item" to="/">
-                    Log out
+                </MDBNavItem>
+                <MDBNavItem>
+                  <Link
+                    className="nav-link"
+                    style={{
+                      borderRight: "1px solid rgba(153,153,153,.298039)",
+                    }}
+                    to="/"
+                  >
+                    Signup
                   </Link>
-                </MDBDropdownMenu>
-              </MDBDropdown>
-            </MDBNavItem>
+                </MDBNavItem>
+              </>
+            )}
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBNavbar>
