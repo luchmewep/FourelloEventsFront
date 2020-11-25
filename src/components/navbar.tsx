@@ -12,7 +12,7 @@ import {
   MDBDropdownMenu,
   MDBFormInline,
 } from "mdbreact"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 
 export default function NavBar() {
   const [isHamOpen, setIsHamOpen] = useState(false)
@@ -33,12 +33,12 @@ export default function NavBar() {
         <MDBNavbarToggler onClick={toggleCollapse} />
         <MDBCollapse id="navbarCollapse3" isOpen={isHamOpen} navbar>
           <MDBNavbarNav left>
-            <MDBNavItem active>
+            <MDBNavItem active={location.pathname.match("^[/]$") !== null}>
               <Link className="nav-link" to="/">
                 Home
               </Link>
             </MDBNavItem>
-            <MDBNavItem>
+            <MDBNavItem active={location.pathname.match("hamima") !== null}>
               <Link className="nav-link" to="/hamima">
                 Hamima
               </Link>
@@ -106,3 +106,23 @@ export default function NavBar() {
     </MDBContainer>
   )
 }
+
+const NavLink = (
+  props: JSX.IntrinsicAttributes &
+    JSX.IntrinsicClassAttributes<Link<unknown>> &
+    Readonly<import("gatsby-link").GatsbyLinkProps<unknown>> &
+    Readonly<{ children?: React.ReactNode }>
+) => (
+  <Link
+    {...props}
+    getProps={({ isCurrent }) => {
+      // the object returned here is passed to the
+      // anchor element's props
+      return {
+        style: {
+          color: isCurrent ? "red" : "blue",
+        },
+      }
+    }}
+  />
+)
