@@ -1,6 +1,7 @@
 yarn dev // to run the program
 git pull //to get new code
-git push // to upload code
 git add . //add all files
 git commit -m "message nimu" //commit all files
+git push // to upload code
 git status // check for changes
+ctrl + c // stop program 

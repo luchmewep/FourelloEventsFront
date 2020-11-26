@@ -16,7 +16,7 @@ import SEO from "../components/seo"
 export default function hamima() {
   return (
     <Layout>
-      <SEO title="Home" />
+      <SEO title="Hamima" />
       <MDBContainer className="mt-5 text-center">
         <MDBRow>
           <MDBCol>

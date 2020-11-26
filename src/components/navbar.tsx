@@ -88,14 +88,8 @@ export default function NavBar() {
                   </Link>
                 </MDBNavItem>
                 <MDBNavItem>
-                  <Link
-                    className="nav-link"
-                    style={{
-                      borderRight: "1px solid rgba(153,153,153,.298039)",
-                    }}
-                    to="/"
-                  >
-                    Signup
+                  <Link className="nav-link" to="/register">
+                    Register
                   </Link>
                 </MDBNavItem>
               </>
