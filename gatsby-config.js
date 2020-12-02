@@ -1,35 +1,35 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Typescript Minimal`,
-    description: `A minimal, bare bones Typescript starter for Gatsby`,
-    author: `@benbarber`,
-    siteUrl: `https://github.com/benbarber/gatsby-typescript-minimal`
+    title: `Fourello Events`,
+    description: `Super Admin Portal for Fourello Events Microsite`,
+    author: `@luchmewep`,
+    siteUrl: `https://event-staging.fourello.com`
   },
   plugins: [
     `gatsby-plugin-typescript`,
     `gatsby-plugin-styled-components`,
     `gatsby-plugin-react-helmet`,
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `images`,
-        path: `${__dirname}/src/images`,
-      },
-    },
+    // {
+    //   resolve: `gatsby-source-filesystem`,
+    //   options: {
+    //     name: `images`,
+    //     path: `${__dirname}/src/images`,
+    //   },
+    // },
     `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
-    {
-      resolve: `gatsby-plugin-manifest`,
-      options: {
-        name: `gatsby-typescript-minimal`,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `src/images/logo.png`,
-      },
-    },
+    // `gatsby-plugin-sharp`,
+    // {
+    //   resolve: `gatsby-plugin-manifest`,
+    //   options: {
+    //     name: `gatsby-typescript-minimal`,
+    //     short_name: `starter`,
+    //     start_url: `/`,
+    //     background_color: `#663399`,
+    //     theme_color: `#663399`,
+    //     display: `minimal-ui`,
+    //     icon: `src/images/logo.png`,
+    //   },
+    // },
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {

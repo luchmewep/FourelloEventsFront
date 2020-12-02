@@ -1,8 +1,6 @@
-import { Link } from "gatsby"
+import { graphql, Link, useStaticQuery } from "gatsby"
 import {
-  MDBContainer,
   MDBNavbar,
-  MDBNavbarBrand,
   MDBNavbarToggler,
   MDBCollapse,
   MDBNavbarNav,
@@ -10,110 +8,77 @@ import {
   MDBDropdown,
   MDBDropdownToggle,
   MDBDropdownMenu,
-  MDBFormInline,
+  MDBNavbarBrand,
+  MDBIcon,
+  MDBDropdownItem,
 } from "mdbreact"
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
+import { useContext } from "react"
+import { AuthContext } from "../contexts/AuthContext"
+import { CurrentPageContext } from "../contexts/CurrentPageContext"
 
 export default function NavBar() {
-  const [isHamOpen, setIsHamOpen] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
-  const toggleCollapse = () => setIsHamOpen(!isHamOpen)
+  const { checkPage, authCookie, userCookie } = useContext(CurrentPageContext)
+  const { logoutUser } = useContext(AuthContext)
+  const [isCollapsed, setIsCollapsed] = useState(false)
+  const toggleCollapse = () => setIsCollapsed(!isCollapsed)
+  const data = useStaticQuery(graphql`
+    query SiteTitleQuery {
+      site {
+        siteMetadata {
+          title
+          description
+        }
+      }
+    }
+  `)
   return (
-    <MDBContainer>
-      <MDBNavbar
-        color="secondary-color"
-        dark
-        expand={"lg"}
-        scrolling
-        fixed={"top"}
-      >
-        <MDBNavbarBrand>
-          <strong className="white-text">Lulago</strong>
-        </MDBNavbarBrand>
-        <MDBNavbarToggler onClick={toggleCollapse} />
-        <MDBCollapse id="navbarCollapse3" isOpen={isHamOpen} navbar>
-          <MDBNavbarNav left>
-            <MDBNavItem active={isCurrentPage("root")}>
-              <Link className="nav-link" to="/">
-                Home
-              </Link>
-            </MDBNavItem>
-            <MDBNavItem active={isCurrentPage("hamima")}>
-              <Link className="nav-link" to="/hamima">
-                Hamima
-              </Link>
-            </MDBNavItem>
-          </MDBNavbarNav>
-          <MDBNavbarNav center>
-            <MDBNavItem>
-              <MDBFormInline waves>
-                <div className="md-form my-0">
-                  <input
-                    className="form-control mr-sm-2"
-                    type="text"
-                    placeholder="Search"
-                    aria-label="Search"
-                  />
-                </div>
-              </MDBFormInline>
-            </MDBNavItem>
-          </MDBNavbarNav>
+    <MDBNavbar color="secondary-color" dark expand="md">
+      <MDBNavbarBrand>
+        <strong className="white-text">{data.site.siteMetadata.title}</strong>
+      </MDBNavbarBrand>
+      <MDBNavbarToggler onClick={toggleCollapse} />
+      <MDBCollapse id="navbarCollapse3" isOpen={isCollapsed} navbar>
+        <MDBNavbarNav left>
+          <MDBNavItem active={checkPage("dashboard")}>
+            <Link className="nav-link" to="/dashboard">
+              <MDBIcon icon="home" fixed /> Dashboard
+            </Link>
+          </MDBNavItem>
+          <MDBNavItem active={checkPage("events")}>
+            <Link className="nav-link" to="/events">
+              <MDBIcon icon="calendar-alt" fixed /> Events
+            </Link>
+          </MDBNavItem>
+        </MDBNavbarNav>
+        {userCookie && (
           <MDBNavbarNav right>
-            {isLoggedIn ? (
-              <MDBNavItem>
-                <MDBDropdown>
-                  <MDBDropdownToggle className="dopdown-toggle" nav>
-                    <img
-                      src="https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg"
-                      className="rounded-circle z-depth-0"
-                      style={{ height: "35px", padding: 0 }}
-                      alt=""
-                    />
-                  </MDBDropdownToggle>
-                  <MDBDropdownMenu className="dropdown-default" right>
-                    <Link className="dropdown-item" to="/">
-                      My account
-                    </Link>
-                    <Link className="dropdown-item" to="/">
-                      Log out
-                    </Link>
-                  </MDBDropdownMenu>
-                </MDBDropdown>
-              </MDBNavItem>
-            ) : (
-              <>
-                <MDBNavItem>
-                  <Link className="nav-link" to="/login">
-                    Login
+            <MDBNavItem>
+              <MDBDropdown>
+                <MDBDropdownToggle className="dopdown-toggle" nav>
+                  <img
+                    src={
+                      "https://mdbootstrap.com/img/Photos/Avatars/avatar-2.jpg"
+                    }
+                    className="rounded-circle z-depth-0 mr-1"
+                    style={{ height: "25px", padding: 0 }}
+                    alt=""
+                  />
+                  {`${userCookie.name} (${userCookie.email})`}
+                </MDBDropdownToggle>
+                <MDBDropdownMenu className="dropdown-default" right>
+                  <Link className="dropdown-item" to="/">
+                    <MDBIcon icon="user" fixed /> Profile
                   </Link>
-                </MDBNavItem>
-                <MDBNavItem>
-                  <Link className="nav-link" to="/register">
-                    Register
-                  </Link>
-                </MDBNavItem>
-              </>
-            )}
+                  <MDBDropdownItem onClick={logoutUser}>
+                    <MDBIcon icon="sign-out-alt" fixed /> Log out
+                  </MDBDropdownItem>
+                </MDBDropdownMenu>
+              </MDBDropdown>
+            </MDBNavItem>
           </MDBNavbarNav>
-        </MDBCollapse>
-      </MDBNavbar>
-    </MDBContainer>
+        )}
+      </MDBCollapse>
+    </MDBNavbar>
   )
-}
-
-export const isBrowser = () => typeof window !== "undefined"
-
-export const isCurrentPage = (page: string) => {
-  if (!isBrowser()) return false
-  switch (page) {
-    case "root":
-      return location.pathname.match("^/$") !== null
-      break
-    case "hamima":
-      return location.pathname.match("hamima") !== null
-      break
-    default:
-      return false
-      break
-  }
 }

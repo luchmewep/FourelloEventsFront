@@ -10,7 +10,7 @@ import "bootstrap-css-only/css/bootstrap.min.css"
 import "mdbreact/dist/css/mdb.css"
 import { MDBContainer } from "mdbreact"
 
-const Layout = ({ children }: LayoutProps) => (
+const Layout = ({ children }: IProps) => (
   <MDBContainer
     fluid
     style={{
@@ -23,14 +23,14 @@ const Layout = ({ children }: LayoutProps) => (
     }}
   >
     <NavBar />
-    <MDBContainer fluid className="pt-3 mt-5 p-5">
+    <MDBContainer fluid className="mt-5 p-5">
       {children}
     </MDBContainer>
     <Footer />
   </MDBContainer>
 )
 
-interface LayoutProps {
+export interface IProps {
   children: React.ReactNode
 }
 
