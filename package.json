@@ -5,6 +5,8 @@
   "version": "0.1.0",
   "author": "@benbarber",
   "dependencies": {
+    "@material-ui/core": "^4.11.2",
+    "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.0",
     "gatsby": "^2.13.64",
     "gatsby-image": "^2.2.8",
@@ -12,6 +14,7 @@
     "gatsby-transformer-sharp": "^2.8.0",
     "jwt-decode": "^3.1.2",
     "mdbreact": "https://bit.ly/mdbreact4250",
+    "mui-datatables": "^3.7.1",
     "react": "^16.9.0",
     "react-cookie": "^4.0.3",
     "react-dom": "^16.9.0",
@@ -22,6 +25,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.0.0-0",
+    "@types/mui-datatables": "^3.7.1",
     "@types/react": "^16.8.8",
     "@types/react-dom": "^16.8.2",
     "@types/react-helmet": "^5.0.8",
